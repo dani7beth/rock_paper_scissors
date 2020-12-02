@@ -20,13 +20,18 @@ const renderChoices = () => {
     state.choices.forEach((choice, index) => {
         htmlString += `<div class='btn-group mr-2 choice' role='group'>
             
-            <button class='btn btn-success btn-lg' onclick='renderAnswer(${index})'>${choice}</button>`;
-            htmlString += `</div>`;
-           
-            
+            <button class='btn btn-success btn-lg' onclick='
+            setDiv();
+            renderAnswer(${index});'>${choice}</button>`;
+            htmlString += `</div>`;     
     });
     htmlString += `</div>`;
     return htmlString;
+};
+
+const setDiv = () =>{
+    let divId = document.getElementById("answer");
+    divId.style.display = 'none';
 };
 
 //render the user's answer
@@ -34,31 +39,69 @@ const renderAnswer = (choice) => {
     //making sure we are pressing the right button
     console.log(state.choices[choice]);
 
-    let answer = '';
+    let htmlString = `<div class='user-choice'>`;
 
     if(choice === 0){
-        answer += `You Chose:\nrock`;
+        htmlString += `<h4>You Chose:</h4>
+                            <br/>
+                            <p>Rock</p>`;
     }else if(choice === 1){
-        answer += `You Chose:\npaper`;
+        htmlString += `<h4>You Chose:</h4>
+                            <br/>
+                            <p>Paper</p>`;
     }else{
-        answer += `You Chose:\nscissor`;
+        htmlString += `<h4>You Chose:</h4>
+                            <br/>
+                            <p>Scissors</p>`;
     }
-    alert(answer);
+    htmlString += `</div>`;
+    //alert(answer);
 
     let userAns = choice;
     //call computer answer
     let compAns = computerAnswer();
-    //call check answer 
-    checkAnswer(userAns, compAns);
+    htmlString += `<div class= 'comp-answer'>`;
+    if(compAns === 0){
+        htmlString += `<h4>Computer Chose:</h4>
+                            <br/>
+                            <p>Rock</p>`;
+    }else if(compAns === 1){
+        htmlString += `<h4>Computer Chose:</h4>
+                            <br/>
+                            <p>Paper</p>`;
+    }else{
+        htmlString += `<h4>Computer Chose:</h4>
+                            <br/>
+                            <p>Scissors</p>`;
+    }
+    htmlString += `</div>`;
 
-    return answer;
+    //call check answer 
+    let winner = checkAnswer(userAns, compAns);
+    htmlString += `<div class='winner'>
+                        <h4>Winner:</h4>
+                        <br />
+                        <p>${winner}</p>
+                    </div>`;
+    // show and hide div
+    let divId = document.getElementById("answer");
+    divId.innerHTML = htmlString;
+
+    if (divId.style.display === "none"){
+        divId.style.display = "block";
+        
+    }else{
+        divId.style.display = "none";
+    }
+
+    return htmlString;
 };
 
 //computer grabs an answer and shows to user
 const computerAnswer = () =>{
     let compAnswer = Math.floor(Math.random() * state.choices.length);
     
-    alert('Computer Chose:\n' + state.choices[compAnswer]);
+    //alert('Computer Chose:\n' + state.choices[compAnswer]);
 
     return compAnswer;
 };
@@ -77,11 +120,11 @@ const checkAnswer = (userAns, compAns)=>{
     if(userAns === compAns){
         outcome = 'Tie game!';
     }else if(userWin){
-        outcome = 'You win!';
+        outcome = 'You';
     }else if(compWin){
-        outcome = 'You lose!';
+        outcome = 'Computer';
     }
-    return alert(outcome);
+    return outcome;
 };
 
 
