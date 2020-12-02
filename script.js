@@ -20,7 +20,7 @@ const renderChoices = () => {
     state.choices.forEach((choice, index) => {
         htmlString += `<div class='btn-group mr-2 choice' role='group'>
             
-            <button class='btn btn-success btn-lg' onclick='
+            <button class='btn btn-warning btn-lg' onclick='
             setDiv();
             renderAnswer(${index});'>${choice}</button>`;
             htmlString += `</div>`;     
@@ -38,8 +38,9 @@ const setDiv = () =>{
 const renderAnswer = (choice) => {
     //making sure we are pressing the right button
     console.log(state.choices[choice]);
+    let htmlString = `<div class='d-flex flex-row justify-content-center'>`;
 
-    let htmlString = `<div class='user-choice'>`;
+    htmlString += `<div class='user-choice m-auto'>`;
 
     if(choice === 0){
         htmlString += `<h4>You Chose:</h4>
@@ -60,7 +61,7 @@ const renderAnswer = (choice) => {
     let userAns = choice;
     //call computer answer
     let compAns = computerAnswer();
-    htmlString += `<div class= 'comp-answer'>`;
+    htmlString += `<div class= 'comp-answer m-auto'>`;
     if(compAns === 0){
         htmlString += `<h4>Computer Chose:</h4>
                             <br/>
@@ -78,7 +79,7 @@ const renderAnswer = (choice) => {
 
     //call check answer 
     let winner = checkAnswer(userAns, compAns);
-    htmlString += `<div class='winner'>
+    htmlString += `<div class='winner m-auto'>
                         <h4>Winner:</h4>
                         <br />
                         <p>${winner}</p>
@@ -93,6 +94,8 @@ const renderAnswer = (choice) => {
     }else{
         divId.style.display = "none";
     }
+
+    htmlString += `</div>`
 
     return htmlString;
 };

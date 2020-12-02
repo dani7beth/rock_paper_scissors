@@ -1,3 +1,30 @@
+/* color pallets
+black - #2a363b
+light red - #e84a5f;
+peach - #ff847c;
+light orange - #fecea8;
+ */
+ 
+
+body{
+    background-color: #2a363b;
+    color: #ff847c;
+}
+h1{
+    font-family: 'Lobster';
+    font-size: 4rem;
+    text-align: center;
+    padding: 10%;
+}
 .btn{
     margin: 7%;
+}
+.choices{
+    padding: 7%;
+    text-align: center;
+}
+.flex-row{
+    color: #2a363b;
+    padding: 7%;
+    background-color: #ff847c;
 }
