@@ -8,6 +8,9 @@ let choice3 = "scissor";
 let state = {
     headerText: "Rock, Paper, Scissors",
     choices: [choice1, choice2, choice3],
+    wins: 0,
+    losses: 0,
+    ties: 0,
 };
 
 //SOME CRUD actions create, update, and delete will not be needed for this assignment
@@ -97,6 +100,7 @@ const renderAnswer = (choice) => {
 
     htmlString += `</div>`
 
+    
     return htmlString;
 };
 
@@ -127,7 +131,40 @@ const checkAnswer = (userAns, compAns)=>{
     }else if(compWin){
         outcome = 'Computer';
     }
+
+    countScore(outcome);
+    
     return outcome;
+};
+
+const countScore = (outcome) => {
+
+    if(outcome === 'Tie game!'){
+        state.ties += 1
+    }else if(outcome === 'You'){
+        state.wins += 1;
+    }else{
+        state.losses += 1;
+    }
+    
+    let htmlString = `<div class='d-flex flex-row justify-content-center m-auto'>
+    <div class='scores m-auto'>
+        <h4>Wins</h4>
+        <p>${state.wins}</p>
+    </div>
+    <div class='scores m-auto'>
+        <h4>Losses</h4>
+        <p>${state.losses}</p>
+    </div>
+    <div class='scores m-auto'>
+        <h4>Ties</h4>
+        <p>${state.ties}</p>
+    </div>
+    </div>`;
+
+   let divId = document.getElementById("score");
+    divId.innerHTML = htmlString;
+
 };
 
 
