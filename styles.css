@@ -9,6 +9,8 @@ light orange - #fecea8;
 body{
     background-color: #2a363b;
     color: #ff847c;
+    font-family: 'Montserrat';
+    font-size: 1.5rem;
 }
 h1{
     font-family: 'Lobster';
